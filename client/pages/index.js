@@ -3,6 +3,7 @@ import React,{ useState, useEffect, useContext } from 'react'
 
 
 import { ChatAppContext } from '../Context/ChatAppContext'
+import { Filter, Friend } from '../components'
 
 const Home = () => {
 
@@ -14,7 +15,10 @@ const Home = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>Mohammed</div>
+      <div>
+        <Filter />
+        <Friend />
+      </div>
     </>
   )
 }

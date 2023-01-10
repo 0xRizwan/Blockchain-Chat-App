@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, {useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
 // Internal imports
@@ -35,8 +35,8 @@ export const ChatAppProvider = ({children}) => {
             setAccount(connectAccount);
 
             // Get username
-            const userName = await contract.getUsername(connectAccount);
-            setUserName(userName);
+            // const userName = await contract.getUsername(connectAccount);
+            // setUserName(userName);
 
             // Get my friend list
             const friendList = await contract.getMyFriendList();
@@ -47,13 +47,13 @@ export const ChatAppProvider = ({children}) => {
             setUserList(userList);
             
         } catch (error) {
-            setError("Please install and connect your wallet")
+            // setError("Please install and connect your wallet")
         }
     };
 
     // Calling useEffect when someone reloads or refresh the page
     useEffect(() =>{
-        //  fetchData();
+         fetchData();
     },[])
 
     // Read message
@@ -90,9 +90,9 @@ export const ChatAppProvider = ({children}) => {
     // Add your friends
     const addFriends = async({accountAddress, name}) => {
         try {
-            if(name || accountAddress){
-                return setError("Please provide the required details")
-            }
+            // if(name || accountAddress){
+            //     return setError("Please provide the required details")
+            // }
             const contract = await connectingWithContract();
             const addMyFriend = await contract.addFriend(accountAddress, name);
             setLoading(true);
@@ -137,7 +137,7 @@ export const ChatAppProvider = ({children}) => {
 
 
     return (
-        <ChatAppContext.Provider value={{readMessage, createAccount, addFriends, sendMessage, readUserInfo, account, userName, friendList, friendMessage, loading, userList, error, currentUserAddress, currentUserName}}>
+        <ChatAppContext.Provider value={{readMessage, createAccount, addFriends, sendMessage, readUserInfo, connectWallet,checkIfWalletConnected, account, userName, friendList, friendMessage, loading, userList, error, currentUserAddress, currentUserName}}>
             {children}
         </ChatAppContext.Provider>
     );
